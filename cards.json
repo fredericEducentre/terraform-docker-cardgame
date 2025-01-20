@@ -1,0 +1,194 @@
+{
+  "cards": [
+    {
+      "numero": 1,
+      "type": "connaissance",
+      "contenu": "Le provider Docker permet de gérer des conteneurs Docker à travers Terraform. Vous devez d'abord configurer votre fournisseur Docker pour interagir avec l'API Docker. Pour en savoir plus voir le registry kreuzwerker/docker"
+    },
+    {
+      "numero": 1,
+      "type": "exemple",
+      "contenu": "Voici un exemple de configuration de base pour le provider Docker dans un fichier Terraform :\n\n\n terraform { \n\n required_providers {\n docker = {\n source  = 'kreuzwerker/docker'\n version = '3.0.2'\n}\n}\n}\n\n provider \"docker\" {\n  host = \"unix:///var/run/docker.sock\"\n}\n"
+    },
+    {
+      "numero": 1,
+      "type": "défi",
+      "contenu": "Configurez le provider Docker dans Terraform pour qu'il puisse interagir avec l'API Docker sur votre machine locale."
+    },
+    {
+      "numero": 2,
+      "type": "connaissance",
+      "contenu": "Qu'est-ce que la commande terraform init ? Cette commande initialise un répertoire Terraform, télécharge les plugins nécessaires et prépare l'environnement."
+    },
+    {
+      "numero": 2,
+      "type": "example",
+      "contenu": "$ terraform init"
+    },
+    {
+      "numero": 2,
+      "type": "défi",
+      "contenu": "Exécutez terraform init dans un projet Terraform existant et expliquez ce qu'il fait."
+    },
+    {
+      "numero": "2bis",
+      "type": "connaissance",
+      "contenu": "Les providers dans Terraform sont des plugins qui permettent à Terraform de communiquer avec les APIs des services cloud et d'autres infrastructures pour gérer les ressources. Chaque provider est conçu pour un service particulier, comme AWS, Google Cloud, Azure, Docker, etc. Un provider est nécessaire pour interagir avec chaque service dans Terraform."
+    },
+    {
+      "numero": 3,
+      "type": "connaissance",
+      "contenu": "Avec Terraform et le provider Docker, vous pouvez créer des conteneurs Docker. Vous définissez un conteneur à l'aide du resource 'docker_container'."
+    },
+    {
+      "numero": 3,
+      "type": "exemple",
+      "contenu": "Voici comment créer un conteneur Docker avec Terraform :\n\n \nresource \"docker_container\" \"nginx\" {\n  image = \"nginx\"\n  name  = \"nginx-container\"\n}"
+    },
+    {
+      "numero": 3,
+      "type": "défi",
+      "contenu": "Créez un conteneur Docker avec Terraform en utilisant l'image `fredericeducentre/ubuntu-ssh` et exposez le port SSH (22) sur un port externe (par exemple, 24)."
+    },
+    {
+      "numero": "3bis",
+      "type": "connaissance",
+      "contenu": "Les ressources dans Terraform représentent des éléments d'infrastructure (comme des serveurs, des bases de données, des réseaux, etc.) qui peuvent être créés, modifiés ou supprimés. Une ressource est définie dans un fichier de configuration Terraform et peut être gérée via des fournisseurs (par exemple, AWS, Docker, etc.)."
+    },
+    {
+      "numero": 4,
+      "type": "connaissance",
+      "contenu": "Qu'est-ce que le plan d'exécution dans Terraform ? Il s'agit d'une étape où Terraform détermine les changements nécessaires pour atteindre l'état désiré."
+    },
+    {
+      "numero": 4,
+      "type": "example",
+      "contenu": "$ terraform plan"
+    },
+    {
+      "numero": 4,
+      "type": "défi",
+      "contenu": "Générez un plan d'exécution Terraform et décrivez les sorties."
+    },
+    {
+      "numero": 5,
+      "type": "connaissance",
+      "contenu": "Qu'est-ce que terraform fmt ? Cette commande formate le code Terraform pour le rendre lisible et cohérent."
+    },
+    {
+      "numero": 5,
+      "type": "example",
+      "contenu": "$ terraform fmt"
+    },
+    {
+      "numero": 5,
+      "type": "défi",
+      "contenu": "Exécutez terraform fmt sur une configuration mal formatée et observez les changements."
+    },
+    {
+      "numero": 6,
+      "type": "connaissance",
+      "contenu": "Qu'est-ce que la commande terraform apply ? Elle applique les changements nécessaires pour atteindre l'état désiré spécifié dans le fichier de configuration."
+    },
+    {
+      "numero": 6,
+      "type": "example",
+      "contenu": "$ terraform apply"
+    },
+    {
+      "numero": 6,
+      "type": "défi",
+      "contenu": "Appliquez une configuration Terraform et expliquez les étapes et les résultats."
+    },
+    {
+      "numero": 7,
+      "type": "connaissance",
+      "contenu": "Comment fonctionne la commande terraform destroy ? Elle détruit toutes les ressources gérées par Terraform."
+    },
+    {
+      "numero": 7,
+      "type": "example",
+      "contenu": "$ terraform destroy"
+    },
+    {
+      "numero": 7,
+      "type": "défi",
+      "contenu": "Détruisez une infrastructure avec terraform destroy et expliquez son importance."
+    },
+    {
+      "numero": 8,
+      "type": "connaissance",
+      "contenu": "Les réseaux Docker permettent de connecter plusieurs conteneurs entre eux. Terraform vous permet de définir un réseau et d'attacher des conteneurs à ce réseau."
+    },
+    {
+      "numero": 8,
+      "type": "exemple",
+      "contenu": "Voici un exemple de création d'un réseau Docker et d'attachement d'un conteneur :\n\n\nresource \"docker_network\" \"my_network\" {\n  name = \"my_network\"\n}\n\nresource \"docker_container\" \"nginx_on_network\" {\n  image = \"nginx\"\n  name  = \"nginx-container\"\n  networks_advanced {\n name = docker_network.my_network.name\n}"
+    },
+    {
+      "numero": 8,
+      "type": "défi",
+      "contenu": "Créez un réseau Docker et assignez-le à votre conteneur avec l'image fredericeducentre/ubuntu-ssh. Ensuite, tentez de connecter un autre conteneur au même réseau et vérifiez la connectivité entre eux."
+    },
+    {
+      "numero": 9,
+      "type": "connaissance",
+      "contenu": "Les variables sont utilisées pour rendre vos configurations Terraform réutilisables et paramétrables. Vous pouvez définir des variables pour des valeurs comme les ports, les images Docker, etc. \nLes variables peuvent être de type string, number, bool, list, ..."
+    },
+    {
+      "numero": 9,
+      "type": "exemple",
+      "contenu": "Voici comment définir et utiliser des variables dans Terraform :\n\n\nvariable \"image\" {\n  type    = string\n}\n\nresource \"docker_container\" \"my-container\" {\n  image = \"var.image\"\n  name  = \"my-container\"\n}"
+    },
+    {
+      "numero": 9,
+      "type": "défi",
+      "contenu": "Définissez une variable pour le port SSH externe et utilisez-la dans votre ressource Docker. Modifiez ensuite la valeur de la variable et appliquez les changements."
+    },
+    {
+      "numero": 10,
+      "type": "connaissance",
+      "contenu": "La concaténation de variables dans HCL permet de combiner plusieurs chaînes de caractères en une seule. Cela peut être utile pour la construction de noms dynamiques, de chemins de fichiers ou d'autres valeurs. Dans HCL, vous pouvez utiliser l'interpolation de chaînes pour effectuer cette tâche."
+    },
+    {
+      "numero": 10,
+      "type": "exemple",
+      "contenu": "Voici un exemple d'interpolation de variables dans une chaîne de caractères pour construire une adresse de connexion :\n\n\n\nvariable \"image\" {\n  type    = string\n}\n\nresource \"docker_container\" \"my-container\" {\n  image = \"var.image\"\n  name  = \"${var.image}-container\"\n}"
+    },
+    {
+      "numero": 10,
+      "type": "défi",
+      "contenu": "Créez une configuration où vous concaténez des variables."
+    },
+    {
+      "numero": 11,
+      "type": "connaissance",
+      "contenu": "Les sorties Terraform vous permettent d'extraire des informations des ressources créées, telles que des adresses IP ou des ports."
+    },
+    {
+      "numero": 11,
+      "type": "exemple",
+      "contenu": "Voici comment afficher l'adresse du conteneur après sa création :\n\n\noutput \"network_info\" {\n  value=docker_container.container_on_networ\nk.network_data\n}"
+    },
+    {
+      "numero": 11,
+      "type": "défi",
+      "contenu": "Créez une sortie dans votre configuration Terraform pour afficher l'adresse IP du conteneur Docker une fois celui-ci créé."
+    },
+    {
+      "numero": 12,
+      "type": "connaissance",
+      "contenu": "Le paramètre `count` dans Terraform permet de créer plusieurs instances d'une ressource. Il prend un entier comme valeur, spécifiant combien d'exemplaires d'une ressource doivent être créés. Chaque instance créée peut avoir des attributs ou des configurations spécifiques en fonction de l'index de `count`."
+    },
+    {
+      "numero": 12,
+      "type": "exemple",
+      "contenu": "Voici un exemple simple où nous utilisons `count` pour créer plusieurs instances d'un conteneur Docker :\n\nresource \"docker_container\" \"my_container\" {\n  count = 3\n  image = \"nginx\"\n  name  = \"nginx-container-${count.index}\"\n  ports {\n    internal = 80\n    external = 81 + count.index\n  }\n}\n\nDans cet exemple, trois conteneurs sont créés, avec des noms et des ports dynamiquement assignés en fonction de l'index du compteur."
+    },
+    {
+      "numero": 12,
+      "type": "défi",
+      "contenu": "Utilisez `count` pour créer 5 conteneurs Docker avec des noms et des ports différents. Assurez-vous que les conteneurs ont des ports uniques, par exemple, en incrémentant le port à chaque instance."
+    }
+  ]
+}
